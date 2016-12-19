@@ -1,0 +1,16 @@
+# This will be the hostname and virtualhost servername. It should end with .dev
+hostname: example.dev
+
+# This is the private address. Grab the next available from the Google spreadsheet.
+private_address: 192.168.202.101
+
+# This is the public html directory inside the app
+public_dir: web
+
+# Add all required PHP modules to this list
+php_modules:
+    - php5-intl
+
+# Specify one or more databases to be created
+mysql_databases:
+    - example

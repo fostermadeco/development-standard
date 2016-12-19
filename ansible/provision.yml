@@ -1,0 +1,12 @@
+---
+# Modify as necessary
+- hosts: all
+  roles:
+      - system
+      - lamp
+
+  tasks:
+    - name: copy profile files
+      copy: src={{ item }} dest=/home/vagrant force=no
+      with_fileglob:
+          - files/dot/.*
