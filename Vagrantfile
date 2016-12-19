@@ -22,6 +22,11 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder ".", "/var/www/#{vars['hostname']}", type: "nfs"
 
+  config.vm.provider "virtualbox" do |virtualbox|
+    virtualbox.memory = 1024
+    virtualbox.cpus = 2
+  end
+
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
     ansible.playbook = "ansible/provision.yml"
