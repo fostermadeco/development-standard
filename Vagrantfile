@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+
+require 'yaml'
+
+dir = File.dirname(File.expand_path(__FILE__))
+vars = YAML.load_file("#{dir}/ansible/group_vars/all")
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.hostname = vars["hostname"]
+  config.vm.network "private_network", ip: vars["private_address"]
+
+  config.hostsupdater.remove_on_suspend = false
+
+  config.ssh.username = "vagrant"
+  config.ssh.password = "vagrant"
+  config.ssh.insert_key = true
+  config.ssh.keys_only = false
+  config.ssh.forward_agent = true
+
+  config.vm.synced_folder ".", "/var/www/#{vars['hostname']}", type: "nfs"
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.verbose = "v"
+    ansible.playbook = "ansible/provision.yml"
+  end
+
+end
