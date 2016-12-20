@@ -1,6 +1,16 @@
 # Development Standard
 
-Base files for provisioning a standard development environment
+Base files for provisioning a standard development environment.
+
+## What will this do for me?
+
+After following the steps outlined below, your fellow devs will be able to clone a repo and have a fully functional development environment simply by running `vagrant up`.
+
+## Features
+
+* Dev box IP address automatically added to `hosts` file.
+* Local `https`-enabled website with automatic `http` redirects (relativize those asset URLs!).
+* MailHog listens for mail on port 1025 with the web interface available on port 8025 (outbound traffic on ports 25 and 587 is disabled as an extra precaution).
 
 ## Prerequisites
 
@@ -17,4 +27,11 @@ Base files for provisioning a standard development environment
 2. In the project root, run `git submodule add git@github.com:fostermadeco/ansible-roles.git ansible/roles`
 3. Set your project variables in `ansible/group_vars/all`.
 4. When `vagrant up` provisions the development machine to your satisfaction, make the initial commit.
-5. Any additions to the Ansible roles submodule should be committed to its repo.
+
+## Ansible roles
+
+Because this set up uses Vagrant’s Ansible provisioner, the full power of Ansible to use to add any additional project-specific requirements — feel free to modify `provision.yml` as much as you wish. However, if you feel that the addition would be useful in other projects, consider contributing it to the internal Ansible roles repo.  
+
+## Etc.
+
+Because the private IP addresses for dev boxes will now be under source control, there is an internal registry of dev hostnames and addresses. This is currently just a Google spreadsheet (https://docs.google.com/spreadsheets/d/1muC1u3OhrVKdCSPz-BC3NtK0I2HvWWhJ5gV9MgBEmSk), but it may become something more fancy in the future. The addresses start at 192.168.202.101, so pre-existing conflicts should be minimal.   
