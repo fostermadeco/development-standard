@@ -14,3 +14,7 @@ php_modules:
 # Specify one or more databases to be created
 mysql_databases:
     - example
+
+# Specify apt packages
+packages:
+    - git
