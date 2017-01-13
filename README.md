@@ -32,6 +32,14 @@ After following the steps outlined below, your fellow devs will be able to clone
 
 Because this set up uses Vagrant’s Ansible provisioner, the full power of Ansible to use to add any additional project-specific requirements — feel free to modify `provision.yml` as much as you wish. However, if you feel that the addition would be useful in other projects, consider contributing it to the internal Ansible roles repo.  
 
+## Provisioning
+
+If a change is made to the configuration file, the provisioner can be run with the command `vagrant provision`. 
+
+The provisioner can also be triggered with the ansible playbook command. The `--tags` flag can be used to allow you to run a specific part of the configuration, rather than running through the entire provisioning process.
+
+`ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ansible/provision.yml --tags "php_modules"`
+
 ## Etc.
 
 Because the private IP addresses for dev boxes will now be under source control, there is an internal registry of dev hostnames and addresses. This is currently just a Google spreadsheet (https://docs.google.com/spreadsheets/d/1muC1u3OhrVKdCSPz-BC3NtK0I2HvWWhJ5gV9MgBEmSk), but it may become something more fancy in the future. The addresses start at 192.168.202.101, so pre-existing conflicts should be minimal.   
