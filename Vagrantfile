@@ -4,10 +4,11 @@ require 'yaml'
 
 dir = File.dirname(File.expand_path(__FILE__))
 vars = YAML.load_file("#{dir}/ansible/group_vars/all")
+version = YAML.load_file("#{dir}/ansible/roles/version")
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = version
 
   config.vm.hostname = vars["hostname"]
   config.vm.network "private_network", ip: vars["private_address"]
