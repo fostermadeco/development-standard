@@ -7,6 +7,9 @@ private_address: 192.168.202.101
 # This is the public html directory inside the app
 public_dir: web
 
+# This creates a document_root var from the vars declared above
+document_root: /var/www/{{ hostname }}/{{ public_dir }}
+
 # Add all required PHP modules to this list
 php_modules:
     - php5-intl
