@@ -42,4 +42,6 @@ The provisioner can also be triggered with the ansible playbook command. The `--
 
 ## Etc.
 
-Because the private IP addresses for dev boxes will now be under source control, there is an internal registry of dev hostnames and addresses. This is currently just a Google spreadsheet (https://docs.google.com/spreadsheets/d/1muC1u3OhrVKdCSPz-BC3NtK0I2HvWWhJ5gV9MgBEmSk), but it may become something more fancy in the future. The addresses start at 192.168.202.101, so pre-existing conflicts should be minimal.   
+Because the private IP addresses for dev boxes will now be under source control, there is an internal registry of dev hostnames and addresses. This is currently just a Google spreadsheet (https://docs.google.com/spreadsheets/d/1muC1u3OhrVKdCSPz-BC3NtK0I2HvWWhJ5gV9MgBEmSk), but it may become something more fancy in the future. The addresses start at 192.168.202.101, so pre-existing conflicts should be minimal.
+
+The submodule may need to be initilized when pulling down a project with the submodule ```git submodule update --remote```.
