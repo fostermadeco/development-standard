@@ -1,23 +1,109 @@
-# This will be the hostname and virtualhost servername. It should end with .dev
-hostname: example.dev
+#
+# Vagrant Boxes
+#
+# The version of this box will not easily support anything below PHP 7
+version: bento/ubuntu-16.04
 
+#  The version of this box will support PHP 5 (v5.5.9)
+#version: bento/ubuntu-14.04
+
+#
+# Networking
+#
 # This is the private address. Grab the next available from the Google spreadsheet.
-private_address: 192.168.202.101
+private_address: 192.168.202.XXX
 
-# This is the public html directory inside the app
-public_dir: web
+#
+# HOSTS
+#
+# List of host(s) with their associated hostnames, web_roots, etc. Able to support multiple sites.
+#    hostname: Should end in .dev. We're creating a wildcard SSL certificate towards the bottom so
+#              follow the naming convention of site.property.dev (ex: admin.smh.dev or accessportal.pearson.dev).
+#
+#    web_root: Where the files will live on the "server". Vagrant will sync the folder specified in 'path' to
+#			   this directory.
+#
+#    document_root: For vhosts. The location of where the document root lives. For Laravel, etc the document_root
+#		            is the web_root with '/public'. For EE, it is the web_root plus '/app/html'.
+#
+#    path: Where the files live on your machine.
+#
+# NOTE: write up stuff about adding secondary sites to provision.sh script
+#
+hosts:
+    - hostname: site1.property.dev
+      web_root: /var/www/site1.property.dev
+      document_root: /var/www/site1.property.dev
+      path: .
+    #- hostname: site2.property.dev
+    #  web_root: /var/www/site2.property.dev
+    #  document_root: /var/www/site2.property.dev
+    #  path: ../NAME-OF-FOLDER-WHEN-YOU-RAN-GIT-CLONED
 
-# This creates a document_root var from the vars declared above
-document_root: /var/www/{{ hostname }}/{{ public_dir }}
+#
+# Wildcard SSL Certificate
+#
+# Leave off the asterisk. Added in create_certificate.yml
+ssl_cert: .property.dev
 
-# Add all required PHP modules to this list
+# Default ssl cert name used in create_certificate.yml
+ssl_cert_name: wildcard_cert
+
+#
+# PHP
+#
+# Add all required PHP modules to this list. By default, we're going to use PHP 7.
+# If you need an older version of PHP, comment out the ones that are not commented out and
+# uncomment the ones that are.
+#
 php_modules:
-    - php5-intl
+     - php7.0-mcrypt
+     - php7.0-curl
+     - php7.0-fpm
+     - php7.0-cli
+     - php7.0-mysql
+#    - php5-mcrypt
+#    - php5-curl
+#    - libapache2-mod-fastcgi
+#    - php5-fpm
+#    - php5-cli
+#    - php5-mysql
 
-# Specify one or more databases to be created
+#
+# PHP FPM configurations
+# 
+# We're using PHP FPM and based on the PHP requirements, comment out and uncomment based on 
+# the project's needs
+#
+### PHP7
+fpm_service: php7.0-fpm
+fpm_socket: /etc/php/7.0/fpm/pool.d/www.conf
+fpm_timezone: /etc/php/7.0/fpm/php.ini
+
+### PHP5
+#fpm_service: php5-fpm
+#fpm_socket: /etc/php5/fpm/pool.d/www.conf
+#fpm_timezone: /etc/php5/fpm/php.ini
+
+#
+# MySQL
+#
+# If you're using bento/ubuntu-14.04, specifically use MySQL V5.6. (Known issues with v5.5 and FULLTEXT indexes)
+#
+mysql_modules:
+      - mysql-server
+      - mysql-client
+      #- mysql-server-5.6
+      #- mysql-client-5.6
+      - python-mysqldb
+
+### Specify one or more databases to be created
 mysql_databases:
-    - example
+    - example_db
 
-# Specify apt packages
+### Specify apt/system packages
 packages:
     - git
+    - mcrypt
+    - zip
+    - unzip
