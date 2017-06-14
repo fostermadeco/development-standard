@@ -38,7 +38,7 @@ hosts:
     #- hostname: site2.property.dev
     #  web_root: /var/www/site2.property.dev
     #  document_root: /var/www/site2.property.dev
-    #  path: ../NAME-OF-FOLDER-WHEN-YOU-RAN-GIT-CLONED
+    #  path: ../NAME-OF-FOLDER-WHEN-YOU-RAN-GIT-CLONE
 
 #
 # Wildcard SSL Certificate
