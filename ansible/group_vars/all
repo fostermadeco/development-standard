@@ -14,7 +14,7 @@ version: bento/ubuntu-16.04
 private_address: 192.168.202.XXX
 
 #
-# HOSTS
+# Hosts
 #
 # List of host(s) with their associated hostnames, web_roots, etc. Able to support multiple sites.
 #    hostname: Should end in .dev. We're creating a wildcard SSL certificate towards the bottom so
@@ -26,9 +26,16 @@ private_address: 192.168.202.XXX
 #    document_root: For vhosts. The location of where the document root lives. For Laravel, etc the document_root
 #		            is the web_root with '/public'. For EE, it is the web_root plus '/app/html'.
 #
-#    path: Where the files live on your machine.
+#    path: Where the files live on your machine. If what you're working on needs multiple sites that interact with each other,
+#          the name of the folder can be found by looking at the repository url.
 #
-# NOTE: write up stuff about adding secondary sites to provision.sh script
+#          Ex: git@s4mh.git.beanstalkapp.com:/s4mh/screening-ee.git
+#                                                 |<-- this -->|
+#          
+#          The other sites will live one directory up from where the current project.
+#
+# NOTE: If what you're working on needs multiple sites that interact with each other, you will also have to make the
+#       addition to the shell script, provision.sh. Please see provision.sh for documentatin.
 #
 hosts:
     - hostname: site1.property.dev
