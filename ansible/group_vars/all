@@ -88,7 +88,8 @@ fpm_timezone: /etc/php/7.0/fpm/php.ini
 #
 # MySQL
 #
-# If you're using bento/ubuntu-14.04, specifically use MySQL V5.6. (Known issues with v5.5 and FULLTEXT indexes)
+# If you're using bento/ubuntu-14.04, specifically use MySQL V5.6. (Known issues with v5.5 and FULLTEXT indexes).
+# bento/ubuntu-16.04 should be using v5.7
 #
 mysql_modules:
       - mysql-server
