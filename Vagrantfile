@@ -2,15 +2,19 @@
 
 require 'yaml'
 
+system('./provision.sh')
+
 dir = File.dirname(File.expand_path(__FILE__))
 vars = YAML.load_file("#{dir}/ansible/group_vars/all")
-version = YAML.load_file("#{dir}/ansible/roles/version")
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = version
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+  end
 
-  config.vm.hostname = vars["hostname"]
+  config.vm.box = vars["version"]
+
   config.vm.network "private_network", ip: vars["private_address"]
 
   config.hostsupdater.remove_on_suspend = false
@@ -21,7 +25,19 @@ Vagrant.configure("2") do |config|
   config.ssh.keys_only = false
   config.ssh.forward_agent = true
 
-  config.vm.synced_folder ".", "/var/www/#{vars['hostname']}", type: "nfs"
+  if vars["hosts"].count > 1
+    aliases = []
+    vars["hosts"].each do |host|
+        aliases.push(host["hostname"])
+        config.vm.synced_folder "#{host['path']}", "#{host['web_root']}", type: "nfs"
+    end
+    config.hostsupdater.aliases = aliases
+  else
+    vars["hosts"].each do |host|
+      config.vm.hostname = "#{host['hostname']}"
+      config.vm.synced_folder "#{host['path']}", "#{host['web_root']}", type: "nfs"
+    end
+  end
 
   config.vm.provider "virtualbox" do |virtualbox|
     virtualbox.memory = 1024
