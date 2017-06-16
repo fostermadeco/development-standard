@@ -17,30 +17,31 @@ private_address: 192.168.202.XXX
 # Hosts
 #
 # List of host(s) with their associated hostnames, web_roots, etc. Able to support multiple sites.
+#
 #    hostname: Should end in .dev. We're creating a wildcard SSL certificate towards the bottom so
 #              follow the naming convention of site.property.dev (ex: admin.smh.dev or accessportal.pearson.dev).
 #
-#    web_root: Where the files will live on the "server". Vagrant will sync the folder specified in 'path' to
+#    web_root: Where the files will live on the box. Vagrant will sync the folder specified in 'path' to
 #			   this directory.
 #
-#    document_root: For vhosts. The location of where the document root lives. For Laravel, etc the document_root
-#		            is the web_root with '/public'. For EE, it is the web_root plus '/app/html'.
+#    document_root: For vhosts. The location of where the document root lives. For Laravel the document_root
+#		            is the web_root plus '/public'. For EE, it is the web_root plus '/app/html'.
 #
-#    path: Where the files live on your machine. If what you're working on needs multiple sites that interact with each other,
-#          the name of the folder can be found by looking at the repository url.
+#    path: Where the files live on your machine. The primary site's path is '.'. If what you're working on needs
+#          multiple sites each subsequent path must match the name of the repository excluding .git one level up.
+#
+#          NOTE: Remember the name of the folder because you will need it in the provision.sh script.
+#                you will need it in the provision.sh script.
 #
 #          Ex: git@s4mh.git.beanstalkapp.com:/s4mh/screening-ee.git
 #                                                 |<-- this -->|
-#          
-#          The other sites will live one directory up from where the current project.
+#              path would be ../screening-ee
 #
-# NOTE: If what you're working on needs multiple sites that interact with each other, you will also have to make the
-#       addition to the shell script, provision.sh. Please see provision.sh for documentatin.
 #
 hosts:
     - hostname: site1.property.dev
       web_root: /var/www/site1.property.dev
-      document_root: /var/www/site1.property.dev
+      document_root: /var/www/site1.property.dev/public
       path: .
     #- hostname: site2.property.dev
     #  web_root: /var/www/site2.property.dev
@@ -78,8 +79,8 @@ php_modules:
 
 #
 # PHP FPM configurations
-# 
-# We're using PHP FPM and based on the PHP requirements, comment out and uncomment based on 
+#
+# We're using PHP FPM and based on the PHP requirements, comment out and uncomment based on
 # the project's needs
 #
 ### PHP7

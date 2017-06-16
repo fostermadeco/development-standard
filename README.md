@@ -23,10 +23,15 @@ After following the steps outlined below, your fellow devs will be able to clone
 
 ## Creating a new project
 
+> Note: By default, new projects use bento/ubuntu-16.04 (PHP7 and MySQL 5.7). This can be changed in ansible/group_vars/all and a list of other boxes can be found at: https://atlas.hashicorp.com/bento
+
 1. Download and copy the files from this repo (except for this README) into the project folder — do not clone the repo.
-2. In the project root, run `git submodule add git@github.com:fostermadeco/ansible-roles.git ansible/roles`
+2. In the project root, run `git submodule add -b master git@github.com:fostermadeco/ansible-roles.git ansible/roles`
 3. Set your project variables in `ansible/group_vars/all`.
 4. When `vagrant up` provisions the development machine to your satisfaction, make the initial commit.
+
+## Working on an existing project
+When working on an existing project you will need to re-initialize the submodules. After cloning the project run the following command in the project root: `git submodule update --init ansible/roles`. Read the project's README to determine which environment variables are set and make changes to `ansible/group_vars/all` then run `vagrant up`.
 
 ## Ansible roles
 
@@ -34,7 +39,7 @@ Because this set up uses Vagrant’s Ansible provisioner, the full power of Ansi
 
 ## Provisioning
 
-If a change is made to the configuration file, the provisioner can be run with the command `vagrant provision`. 
+If a change is made to the configuration file, the provisioner can be run with the command `vagrant provision`.
 
 The provisioner can also be triggered with the ansible playbook command. The `--tags` flag can be used to allow you to run a specific part of the configuration, rather than running through the entire provisioning process.
 
