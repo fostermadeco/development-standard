@@ -1,34 +1,22 @@
-#
-# Vagrant Boxes
-#
-# The version of this box will not easily support anything below PHP 7
-version: bento/ubuntu-16.04
-
-#  The version of this box will support PHP 5 (v5.5.9)
-#version: bento/ubuntu-14.04
-
-#
-# Networking
-#
 # This is the private address. Grab the next available from the Google spreadsheet.
-private_address: 192.168.202.XXX
+private_address: 192.168.202.101
 
-#
-# Hosts
-#
 # List of host(s) with their associated hostnames, web_roots, etc. Able to support multiple sites.
 #
-#    hostname: Should end in .dev. We're creating a wildcard SSL certificate towards the bottom so
-#              follow the naming convention of site.property.dev (ex: admin.smh.dev or accessportal.pearson.dev).
+#    hostname: Should end in .dev. We're creating a wildcard SSL certificate behind the scenes so
+#              follow the naming convention of site.property.dev (ex: admin.smh.dev or
+#              accessportal.pearson.dev).
 #
-#    web_root: Where the files will live on the box. Vagrant will sync the folder specified in 'path' to
-#			   this directory.
+#    web_root: Where the files will live on the box. Vagrant will sync the folder specified in 'path'
+#			         to this directory.
 #
-#    document_root: For vhosts. The location of where the document root lives. For Laravel the document_root
-#		            is the web_root plus '/public'. For EE, it is the web_root plus '/app/html'.
+#    document_root: For vhosts. The location of where the document root lives. For Laravel the
+#		                document_root is the web_root plus '/public'. For EE, it is the web_root plus
+#                   '/app/html'.
 #
-#    path: Where the files live on your machine. The primary site's path is '.'. If what you're working on needs
-#          multiple sites each subsequent path must match the name of the repository excluding .git one level up.
+#    path: Where the files live on your machine. The primary site's path is '.'. If what you're working
+#          on needs multiple sites each subsequent path must match the name of the repository excluding
+#          .git one level up.
 #
 #          NOTE: Remember the name of the folder because you will need it in the provision.sh script.
 #                you will need it in the provision.sh script.
@@ -48,71 +36,17 @@ hosts:
     #  document_root: /var/www/site2.property.dev
     #  path: ../NAME-OF-FOLDER-WHEN-YOU-RAN-GIT-CLONE
 
+# Add all required PHP modules to this list
 #
-# Wildcard SSL Certificate
-#
-# Leave off the asterisk. Added in create_certificate.yml
-ssl_cert: .property.dev
-
-# Default ssl cert name used in create_certificate.yml
-ssl_cert_name: wildcard_cert
-
-#
-# PHP
-#
-# Add all required PHP modules to this list. By default, we're going to use PHP 7.
-# If you need an older version of PHP, comment out the ones that are not commented out and
-# uncomment the ones that are.
+# This should be moved to ansible-roles/lamp/tasks/install_php.yml
 #
 php_modules:
-     - php7.0-mcrypt
-     - php7.0-curl
-     - php7.0-fpm
-     - php7.0-cli
-     - php7.0-mysql
-#    - php5-mcrypt
-#    - php5-curl
-#    - libapache2-mod-fastcgi
-#    - php5-fpm
-#    - php5-cli
-#    - php5-mysql
+    - php5-intl
 
-#
-# PHP FPM configurations
-#
-# We're using PHP FPM and based on the PHP requirements, comment out and uncomment based on
-# the project's needs
-#
-### PHP7
-fpm_service: php7.0-fpm
-fpm_socket: /etc/php/7.0/fpm/pool.d/www.conf
-fpm_timezone: /etc/php/7.0/fpm/php.ini
-
-### PHP5
-#fpm_service: php5-fpm
-#fpm_socket: /etc/php5/fpm/pool.d/www.conf
-#fpm_timezone: /etc/php5/fpm/php.ini
-
-#
-# MySQL
-#
-# If you're using bento/ubuntu-14.04, specifically use MySQL V5.6. (Known issues with v5.5 and FULLTEXT indexes).
-# bento/ubuntu-16.04 should be using v5.7
-#
-mysql_modules:
-      - mysql-server
-      - mysql-client
-      #- mysql-server-5.6
-      #- mysql-client-5.6
-      - python-mysqldb
-
-### Specify one or more databases to be created
+# Specify one or more databases to be created
 mysql_databases:
-    - example_db
+    - example
 
-### Specify apt/system packages
+# Specify apt packages
 packages:
     - git
-    - mcrypt
-    - zip
-    - unzip
