@@ -6,6 +6,7 @@ system('./provision.sh')
 
 dir = File.dirname(File.expand_path(__FILE__))
 vars = YAML.load_file("#{dir}/ansible/group_vars/all")
+version = YAML.load_file("#{dir}/ansible/roles/version")
 
 Vagrant.configure("2") do |config|
 
