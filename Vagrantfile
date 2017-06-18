@@ -25,18 +25,11 @@ Vagrant.configure("2") do |config|
   config.ssh.keys_only = false
   config.ssh.forward_agent = true
 
-  if vars["hosts"].count > 1
-    aliases = []
-    vars["hosts"].each do |host|
-        aliases.push(host["hostname"])
-        config.vm.synced_folder "#{host['path']}", "#{host['web_root']}", type: "nfs"
-    end
-    config.hostsupdater.aliases = aliases
-  else
-    vars["hosts"].each do |host|
-      config.vm.hostname = "#{host['hostname']}"
-      config.vm.synced_folder "#{host['path']}", "#{host['web_root']}", type: "nfs"
-    end
+  hostnames = vars["hosts"].map{|host| host["hostname"]}
+  config.hostsupdater.aliases = hostnames
+
+  vars["hosts"].each do |host|
+    config.vm.synced_folder "#{host['path']}", "#{host['web_root']}", type: "nfs"
   end
 
   config.vm.provider "virtualbox" do |virtualbox|

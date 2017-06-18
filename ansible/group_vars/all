@@ -25,7 +25,9 @@ private_address: 192.168.202.101
 #                                                 |<-- this -->|
 #              path would be ../screening-ee
 #
-#
+#    git_repo: When the main project needs other site(s) to "offically" work, add the repository url.
+#              The primary site does not need one as you've either already cloned it or are working
+#              on a brand new project.
 hosts:
     - hostname: site1.property.dev
       web_root: /var/www/site1.property.dev
@@ -35,6 +37,7 @@ hosts:
     #  web_root: /var/www/site2.property.dev
     #  document_root: /var/www/site2.property.dev
     #  path: ../NAME-OF-FOLDER-WHEN-YOU-RAN-GIT-CLONE
+    #  git_repo: git-repo-url
 
 # Add all required PHP modules to this list
 #
