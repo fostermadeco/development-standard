@@ -25,9 +25,14 @@ private_address: 192.168.202.101
 #                                                 |<-- this -->|
 #              path would be ../screening-ee
 #
-#    git_repo: When the main project needs other site(s) to "offically" work, add the repository url.
+#    git_repo: When the main project needs other site(s) to "offically" work, add the git repository
+#              url. Running vagrant up or provision will attempt to auto-clone the repository for you.
 #              The primary site does not need one as you've either already cloned it or are working
 #              on a brand new project.
+#
+#              Note: If ancillary sites need to be auto-cloned, uncomment clone_repositories.yml in
+#                    lamp/tasks/main.yml
+#
 hosts:
     - hostname: site1.property.dev
       web_root: /var/www/site1.property.dev
