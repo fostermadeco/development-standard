@@ -23,10 +23,12 @@ After following the steps outlined below, your fellow devs will be able to clone
 
 ## Creating a new project
 
-> Note: By default, new projects use bento/ubuntu-16.04 (PHP7 and MySQL 5.7). This can be changed in ansible/group_vars/all and a list of other boxes can be found at: https://atlas.hashicorp.com/bento
-
 1. Download and copy the files from this repo (except for this README) into the project folder — do not clone the repo.
-2. In the project root, run `git submodule add -b master git@github.com:fostermadeco/ansible-roles.git ansible/roles`
+2. Add the ansible-roles submodule. There are two branches to choose from:
+  - `master` uses bento/ubuntu-16.04 (PHP7 and MySQL 5.7)
+  - `trusty` uses ubuntu/trusty64 (PHP5 and MySQL 5.6)
+
+ In the project root, run `git submodule add -b BRANCH-OF-YOUR-CHOICE git@github.com:fostermadeco/ansible-roles.git ansible/roles`
 3. Set your project variables in `ansible/group_vars/all`.
 4. When `vagrant up` provisions the development machine to your satisfaction, make the initial commit.
 
