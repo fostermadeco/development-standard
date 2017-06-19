@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
   end
 
-  config.vm.box = vars["version"]
+  config.vm.box = version
 
   config.vm.network "private_network", ip: vars["private_address"]
 
