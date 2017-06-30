@@ -25,6 +25,8 @@ private_address: 192.168.202.101
 #                                                 |<-- this -->|
 #              path would be ../screening-ee
 #
+#    project: Used for Django development. The name of the project.
+#
 #    git_repo: When the main project needs other site(s) to "offically" work, add the git repository
 #              url. Running vagrant up or provision will attempt to auto-clone the repository for you.
 #              The primary site does not need one as you've either already cloned it or are working
@@ -38,6 +40,7 @@ hosts:
       web_root: /var/www/site1.property.dev
       document_root: /var/www/site1.property.dev/public
       path: .
+      project: project-name
     #- hostname: site2.property.dev
     #  web_root: /var/www/site2.property.dev
     #  document_root: /var/www/site2.property.dev
@@ -54,6 +57,17 @@ php_modules:
 # Specify one or more databases to be created
 mysql_databases:
     - example
+
+psql_databases:
+    - db_name: db_name
+      db_user: db_user
+      db_pass: db_pass
+
+python_packages:
+    - python-pip 
+    - python-dev
+    - libpq-dev
+    - python-virtualenv
 
 # Specify apt packages
 packages:
