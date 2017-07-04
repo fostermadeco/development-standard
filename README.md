@@ -31,6 +31,16 @@ After following the steps outlined below, your fellow devs will be able to clone
 3. Set your project variables in `ansible/group_vars/all`.
 4. When `vagrant up` provisions the development machine to your satisfaction, make the initial commit.
 
+> Note: By default, running `vagrant up` provisions your development environment as a LAMP stack. If you are working on Python/Django, in provision.yml under roles comment out `- lamp` and uncomment `- django`.
+
+> For the time being, after the box has been provisioned, please follow these additional steps:
+```
+- ssh into the box
+- run 'source bin/activate' in the project directory
+- create the project by running 'django-admin startproject [your-project-name]'
+- as root restart supervisor 'supervisorctl restart all'
+```
+
 ## Working on an existing project
 When working on an existing project you will need to re-initialize the submodules. After cloning the project run the following command in the project root: `git submodule update --init ansible/roles`. Read the project's README to determine which environment variables are set and make changes to `ansible/group_vars/all` then run `vagrant up`.
 
