@@ -32,7 +32,7 @@ After following the steps outlined below, your fellow devs will be able to clone
 4. When `vagrant up` provisions the development machine to your satisfaction, make the initial commit.
 
 > Note: By default, running `vagrant up` provisions your development environment as a LAMP stack. If you are working on Python/Django, in provision.yml under roles comment out `- lamp` and uncomment `- django`.
-
+>
 > For the time being, after the box has been provisioned, please follow these additional steps:
 ```
 - ssh into the box
