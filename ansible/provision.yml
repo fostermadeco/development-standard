@@ -4,6 +4,7 @@
   roles:
       - system
       - lamp
+      #- django
 
   tasks:
       - name: copy profile files
