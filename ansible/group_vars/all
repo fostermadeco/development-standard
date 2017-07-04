@@ -32,8 +32,10 @@ private_address: 192.168.202.101
 #              The primary site does not need one as you've either already cloned it or are working
 #              on a brand new project.
 #
-#              Note: If ancillary sites need to be auto-cloned, uncomment clone_repositories.yml in
-#                    lamp/tasks/main.yml
+#              Note: If ancillary sites need to be auto-cloned, at the bottom of provision.yml
+#                    add the following to run the task:
+#
+#                    - include: roles/lamp/tasks/clone_repositories.yml
 #
 hosts:
     - hostname: site1.property.dev
@@ -45,12 +47,10 @@ hosts:
     #  web_root: /var/www/site2.property.dev
     #  document_root: /var/www/site2.property.dev
     #  path: ../NAME-OF-FOLDER-WHEN-YOU-RAN-GIT-CLONE
+    #  project_name: project2-name
     #  git_repo: git-repo-url
 
 # Add all required PHP modules to this list
-#
-# This should be moved to ansible-roles/lamp/tasks/install_php.yml
-#
 php_modules:
     - php5-intl
 
@@ -58,16 +58,18 @@ php_modules:
 mysql_databases:
     - example
 
+# Add all required Python packages to this list
+python_packages:
+    - python-pip
+    - python-dev
+    - libpq-dev
+    - python-virtualenv
+
+# Specify one or more PostgreSQL databases to be created
 psql_databases:
     - db_name: db_name
       db_user: db_user
       db_pass: db_pass
-
-python_packages:
-    - python-pip 
-    - python-dev
-    - libpq-dev
-    - python-virtualenv
 
 # Specify apt packages
 packages:
