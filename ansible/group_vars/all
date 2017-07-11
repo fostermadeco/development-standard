@@ -45,9 +45,11 @@ hosts:
     #  project_name: project2-name
     #  git_repo: git-repo-url
 
-# Add all required PHP modules to this list
+# Add all required PHP modules to this list without the php{{ version }} prefix.
+# If the full module name is not prefixed with php{{ version }} (e.g., libphp-predis),
+# add it to the apt packages list below.
 php_modules:
-    - php5-intl
+    - intl
 
 # Specify one or more databases to be created
 mysql_databases:
