@@ -31,12 +31,7 @@ private_address: 192.168.202.101
 #              url. Running vagrant up or provision will attempt to auto-clone the repository for you.
 #              The primary site does not need one as you've either already cloned it or are working
 #              on a brand new project.
-#
-#              Note: If ancillary sites need to be auto-cloned, at the bottom of provision.yml
-#                    add the following to run the task:
-#
-#                    - include: roles/lamp/tasks/clone_repositories.yml
-#
+
 hosts:
     - hostname: site1.property.dev
       web_root: /var/www/site1.property.dev

@@ -8,6 +8,12 @@ version = YAML.load_file("#{dir}/ansible/roles/version")
 
 Vagrant.configure("2") do |config|
 
+  if vars["hosts"].count > 1
+      config.trigger.before :up do
+        run "ansible-playbook ansible/clone_repositories.yml -i localhost," # comma is necessary
+      end
+  end
+
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
   end

@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: include vars
+      include_vars:
+        file: "group_vars/all"
+
+    - name: clone repositories
+      local_action:
+        module: git
+        repo: "{{ item.git_repo }}"
+        dest: "../{{ item.path }}" # Go up one more directory from item.path (relative to {project}/ansible-roles)
+      with_items: "{{ hosts }}"
+      when: item.git_repo is defined
