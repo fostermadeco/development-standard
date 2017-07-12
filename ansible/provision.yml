@@ -3,14 +3,14 @@
   # Specifying a role will run all of the role’s tasks.
   roles:
       - system
-      - lamp
-      #- django
 
   tasks:
       - name: copy profile files
         copy: src={{ item }} dest=/home/vagrant force=yes
         with_fileglob:
             - files/dot/.*
+
+- include: ../stack.yml
 
       # Add additional tasks as needed. For example,
       #
