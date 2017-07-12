@@ -1,0 +1,8 @@
+Django==1.11.2
+gunicorn==19.7.1
+meld3==1.0.2
+psycopg2==2.7.1
+pytz==2017.2
+setproctitle==1.1.10
+supervisor==3.2.0
+virtualenv==15.0.1
