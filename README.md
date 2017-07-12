@@ -26,21 +26,12 @@ After following the steps outlined below, your fellow devs will be able to clone
 
 1. Download and copy the files from this repo (except for this README) into the project folder — do not clone the repo.
 2. Add the ansible-roles submodule. There are multiple branches to choose from. In the project root, run `git submodule add -b BRANCH-OF-YOUR-CHOICE git@github.com:fostermadeco/ansible-roles.git ansible/roles`
-  - `master` uses bento/ubuntu-16.04 (PHP7 and MySQL 5.7)
-  - `trusty` uses ubuntu/trusty64 (PHP5 and MySQL 5.6)
+  - `master` uses bento/ubuntu-16.04 (supports PHP7 and MySQL 5.7)
+  - `trusty` uses ubuntu/trusty64 (supports PHP5 and MySQL 5.6)
 
-3. Set your project variables in `ansible/group_vars/all`.
-4. When `vagrant up` provisions the development machine to your satisfaction, make the initial commit.
-
-> Note: By default, running `vagrant up` provisions your development environment as a LAMP stack. If you are working on Python/Django, in provision.yml under roles comment out `- lamp` and uncomment `- django`.
->
-> For the time being, after the box has been provisioned, please follow these additional steps:
-```
-- ssh into the box
-- run 'source bin/activate' in the project directory
-- create the project by running 'django-admin startproject [your-project-name]'
-- as root restart supervisor 'supervisorctl restart all'
-```
+3. Depending upon what you are working on, copy the files for the respective language to the parent directory and then delete the `php` and `python` folders.
+4. Set your project variables in `ansible/group_vars/all`.
+5. When `vagrant up` provisions the development machine to your satisfaction, make the initial commit.
 
 ## Working on an existing project
 When working on an existing project you will need to re-initialize the submodules. After cloning the project run the following command in the project root: `git submodule update --init ansible/roles`. Read the project's README to determine which environment variables are set and make changes to `ansible/group_vars/all` then run `vagrant up`.
