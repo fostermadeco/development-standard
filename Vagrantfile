@@ -8,7 +8,11 @@ version = YAML.load_file("#{dir}/ansible/roles/version")
 
 Vagrant.configure("2") do |config|
 
+  config.vm.hostname = vars["hosts"][0]["hostname"]
+
   if vars["hosts"].count > 1
+      config.hostsupdater.aliases = vars["hosts"][1..-1].map{|host| host["hostname"]}
+
       config.trigger.before :up do
         run "ansible-playbook ansible/clone_repositories.yml -i localhost," # comma is necessary
       end
@@ -29,9 +33,6 @@ Vagrant.configure("2") do |config|
   config.ssh.insert_key = true
   config.ssh.keys_only = false
   config.ssh.forward_agent = true
-
-  hostnames = vars["hosts"].map{|host| host["hostname"]}
-  config.hostsupdater.aliases = hostnames
 
   vars["hosts"].each do |host|
     config.vm.synced_folder "#{host['path']}", "#{host['web_root']}", type: "nfs"
