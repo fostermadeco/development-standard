@@ -50,6 +50,7 @@ hosts:
 # add it to the apt packages list below.
 php_modules:
     - intl
+    - zip
 
 # Specify one or more databases to be created
 mysql_databases:
