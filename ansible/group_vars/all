@@ -52,6 +52,12 @@ php_modules:
     - intl
     - zip
 
+# MySQL to install. Some versions of Ubuntu have multiple versions available
+# and you may not want the one it defaults to
+mysql_modules:
+    - mysql-server
+    - mysql-client
+
 # Specify one or more databases to be created
 mysql_databases:
     - example
