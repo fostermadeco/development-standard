@@ -10,6 +10,9 @@ public_dir: web
 # This creates a document_root var from the vars declared above
 document_root: /var/www/{{ hostname }}/{{ public_dir }}
 
+# Use this if you want to modify your PHP version
+# php_version: "5.6"
+
 # Add all required PHP modules to this list
 php_modules:
     - php5-intl
