@@ -68,18 +68,18 @@ These items are configurable in `ansible/group_vars/all`:
 
 `php_config` - List of php config items to be overrriden. The `section` value will default to `PHP`, which is the correct section most of the time. Use the `section` option the overide the section if it will not be `PHP`.
 
-  php_config:
-    - option: "memory_limit"
-      value: "256M"
-    - option: "date.timezone"
-      section: "Date"
-      value: "UTC"
+	php_config:
+	  - option: "memory_limit"
+	    value: "256M"
+	  - option: "date.timezone"
+	    section: "Date"
+	    value: "UTC"
     
 `mysql_config` - List of mysql config items to be overrriden. The `section` value will default to `mysqld`, which is the correct section most of the time. Use the `section` option the overide the section if it will not be `mysqld`.
 
-  mysql_config:
-    - option: "key_buffer_size"
-      value: "24M"
-    - option: "socket"
-      section: "mysql_safe"
-      value: "/var/run/mysqld/mysql.sock"
+	mysql_config:
+	  - option: "key_buffer_size"
+	  	value: "24M"
+	  - option: "socket"
+	  	section: "mysql_safe"
+	    value: "/var/run/mysqld/mysql.sock"
