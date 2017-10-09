@@ -45,3 +45,41 @@ The provisioner can also be triggered with the ansible playbook command. The `--
 Because the private IP addresses for dev boxes will now be under source control, there is an internal registry of dev hostnames and addresses. This is currently just a Google spreadsheet (https://docs.google.com/spreadsheets/d/1muC1u3OhrVKdCSPz-BC3NtK0I2HvWWhJ5gV9MgBEmSk), but it may become something more fancy in the future. The addresses start at 192.168.202.101, so pre-existing conflicts should be minimal.
 
 The submodule may need to be initilized when pulling down a project with the submodule `git submodule update --remote` or `git submodule update --init ansible/roles`.
+
+## Available Config
+
+These items are configurable in `ansible/group_vars/all`:
+
+`hostname` - This will be the hostname and virtualhost servername. It should end with `.dev`.
+
+`private_address` - This is the private address. Grab the next available from the Google spreadsheet.
+
+`public_dir` - This is the public directory inside the app.
+
+`document_root` - This creates a document root var from the var in `public_dir`. This is typically set to `/var/www/{{ hostname }}/{{ public_dir }}`.
+
+`php_modules` - Add all required PHP modules to this list.
+
+`php_version` (7.0) - Used to override the default php version setting.
+
+`mysql_databases` - Specify one or more databases to be created.
+
+`packages` - List of apt packages.
+
+`php_config` - List of php config items to be overrriden. The `section` value will default to `PHP`, which is the correct section most of the time. Use the `section` option the overide the section if it will not be `PHP`.
+
+  php_config:
+    - option: "memory_limit"
+      value: "256M"
+    - option: "date.timezone"
+      section: "Date"
+      value: "UTC"
+    
+`mysql_config` - List of mysql config items to be overrriden. The `section` value will default to `mysqld`, which is the correct section most of the time. Use the `section` option the overide the section if it will not be `mysqld`.
+
+  mysql_config:
+    - option: "key_buffer_size"
+      value: "24M"
+    - option: "socket"
+      section: "mysql_safe"
+      value: "/var/run/mysqld/mysql.sock"
