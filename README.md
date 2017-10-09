@@ -79,7 +79,7 @@ These items are configurable in `ansible/group_vars/all`:
 
 	mysql_config:
 	  - option: "key_buffer_size"
-	  	value: "24M"
+	    value: "24M"
 	  - option: "socket"
-	  	section: "mysql_safe"
+	    section: "mysql_safe"
 	    value: "/var/run/mysqld/mysql.sock"
