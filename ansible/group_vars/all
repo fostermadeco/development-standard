@@ -15,7 +15,7 @@ document_root: /var/www/{{ hostname }}/{{ public_dir }}
 
 # Add all required PHP modules to this list
 php_modules:
-    - php5-intl
+    - mcrypt
 
 # Specify one or more databases to be created
 mysql_databases:
