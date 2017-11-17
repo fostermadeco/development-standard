@@ -24,3 +24,8 @@ mysql_databases:
 # Specify apt packages
 packages:
     - git
+
+# If you are not using a Mac, uncomment this; sorry, the “trust cert” task
+# is Mac-specific right now
+#
+# trust_cert: 0
