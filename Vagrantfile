@@ -33,4 +33,12 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "ansible/provision.yml"
   end
 
+  if vars["trust_cert"] == 1
+    [:up, :provision].each do |command|
+      config.trigger.after command do
+        run "sudo security add-trusted-cert -d -k '/Library/Keychains/System.keychain' /usr/local/etc/ssl/certs/#{vars['hostname']}.crt"
+      end
+    end
+  end
+
 end

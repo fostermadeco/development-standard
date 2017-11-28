@@ -1,4 +1,4 @@
-# This will be the hostname and virtualhost servername. It should end with .dev
+This will be the hostname and virtualhost servername. It should end with .dev
 hostname: example.dev
 
 # This is the private address. Grab the next available from the Google spreadsheet.
@@ -25,7 +25,4 @@ mysql_databases:
 packages:
     - git
 
-# If you are not using a Mac, uncomment this; sorry, the “trust cert” task
-# is Mac-specific right now
-#
-# trust_cert: 0
+trust_cert: 1
