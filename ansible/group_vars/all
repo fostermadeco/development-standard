@@ -1,4 +1,4 @@
-This will be the hostname and virtualhost servername. It should end with .dev
+# This will be the hostname and virtualhost servername. It should end with .dev
 hostname: example.dev
 
 # This is the private address. Grab the next available from the Google spreadsheet.
