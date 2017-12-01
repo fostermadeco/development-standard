@@ -84,3 +84,5 @@ These items are configurable in `ansible/group_vars/all`:
 	  - option: "socket"
 	    section: "mysql_safe"
 	    value: "/var/run/mysqld/mysql.sock"
+
+`xdebug_port` (9000) - You can override the default port 
