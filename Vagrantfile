@@ -7,6 +7,16 @@ vars = YAML.load_file("#{dir}/ansible/group_vars/all")
 version = YAML.load_file("#{dir}/ansible/roles/version")
 
 Vagrant.configure("2") do |config|
+  
+  certpath = "/usr/local/etc"
+  [:up, :provision].each do |command|
+    if !File.exist?(certpath)
+      config.trigger.before command do
+        run "sudo mkdir -p #{certpath}"
+        run "sudo chown #{`whoami`} #{certpath}"
+      end
+    end
+  end
 
   config.vm.box = version
 
