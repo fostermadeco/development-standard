@@ -26,3 +26,4 @@ packages:
     - git
 
 trust_cert: 1
+certpath: /usr/local/etc

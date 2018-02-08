@@ -8,6 +8,21 @@ version = YAML.load_file("#{dir}/ansible/roles/version")
 
 Vagrant.configure("2") do |config|
 
+  if vars["trust_cert"] == 1
+    [:up, :provision].each do |command|
+      if !File.exist?(vars['certpath'])
+        config.trigger.before command do
+          run "sudo mkdir -p #{vars['certpath']}"
+          run "sudo chown #{`whoami`} #{vars['certpath']}"
+        end
+      end
+
+      config.trigger.after command do
+        run "sudo security add-trusted-cert -d -k '/Library/Keychains/System.keychain' #{vars['certpath']}/ssl/certs/#{vars['hostname']}.crt"
+      end
+    end
+  end
+
   config.vm.box = version
 
   config.vm.hostname = vars["hostname"]
@@ -32,14 +47,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
     ansible.playbook = "ansible/provision.yml"
-  end
-
-  if vars["trust_cert"] == 1
-    [:up, :provision].each do |command|
-      config.trigger.after command do
-        run "sudo security add-trusted-cert -d -k '/Library/Keychains/System.keychain' /usr/local/etc/ssl/certs/#{vars['hostname']}.crt"
-      end
-    end
   end
 
 end
