@@ -1,6 +1,11 @@
 # This will be the hostname and virtualhost servername. It should end with .dev
 hostname: example.dev
 
+# This var is used in Vagrantfile, so embedded vars (e.g., hostname)
+# will *not* be interpolated. Be sure to update the TLD and 2LD
+# accordingly.
+email_hostname: email.example.dev
+
 # This is the private address. Grab the next available from the Google spreadsheet.
 private_address: 192.168.202.101
 
