@@ -26,8 +26,10 @@ After following the steps outlined below, your fellow devs will be able to clone
 
 1. Download and copy the files from this repo (except for this README) into the project folder — do not clone the repo.
 2. In the project root, run `git submodule add git@github.com:fostermadeco/ansible-roles.git ansible/roles`
-3. Set your project variables in `ansible/group_vars/all`.
+3. Set your project variables in `ansible/group_vars/all`
 4. When `vagrant up` provisions the development machine to your satisfaction, make the initial commit.
+
+**Note: When configuring a new project, verify that MySQL and PHP versions in your configuration file match the MySQL and PHP versions on the server that the project will be deployed to. Please review the Available Config section below for information about how to modify these versions.**
 
 ## Ansible roles
 
@@ -66,6 +68,8 @@ These items are configurable in `ansible/group_vars/all`:
 `mysql_databases` - Specify one or more databases to be created.
 
 `packages` - List of apt packages.
+
+`mysql_version` - Specify the version of MySQL to be used.
 
 `php_config` - List of php config items to be overrriden. The `section` value will default to `PHP`, which is the correct section most of the time. Use the `section` option the overide the section if it will not be `PHP`.
 
