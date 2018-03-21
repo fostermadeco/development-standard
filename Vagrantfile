@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: vars["private_address"]
 
   config.hostsupdater.remove_on_suspend = false
-  config.hostsupdater.aliases = [ "#{vars['email_hostname']}" ]
+  config.hostsupdater.aliases = [ "#{vars['email_hostname']}" ] + (vars['server_aliases'] || [])
 
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"

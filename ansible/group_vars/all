@@ -6,6 +6,10 @@ hostname: example.dev
 # accordingly.
 email_hostname: email.example.dev
 
+# Use this if you have additional server aliases (not additional vhosts)
+# server_aliases:
+#    - alias.example.dev
+
 # This is the private address. Grab the next available from the Google spreadsheet.
 private_address: 192.168.202.101
 
