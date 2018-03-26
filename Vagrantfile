@@ -10,17 +10,18 @@ Vagrant::DEFAULT_SERVER_URL.replace('https://vagrantcloud.com')
 
 Vagrant.configure("2") do |config|
 
-  if vars["trust_cert"] == 1
+  if (vars["trust_cert"] || 1) == 1
     [:up, :provision].each do |command|
-      if !File.exist?(vars['certpath'])
+      certpath = vars['certpath'] || "/usr/local/etc"
+      if !File.exist?(certpath)
         config.trigger.before command do
-          run "sudo mkdir -p #{vars['certpath']}"
-          run "sudo chown #{`whoami`} #{vars['certpath']}"
+          run "sudo mkdir -p #{certpath}"
+          run "sudo chown #{`whoami`} #{certpath}"
         end
       end
 
       config.trigger.after command do
-        run "sudo security add-trusted-cert -d -k '/Library/Keychains/System.keychain' #{vars['certpath']}/ssl/certs/#{vars['hostname']}.crt"
+        run "sudo security add-trusted-cert -d -k '/Library/Keychains/System.keychain' #{certpath}/ssl/certs/#{vars['hostname']}.crt"
       end
     end
   end
