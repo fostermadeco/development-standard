@@ -30,5 +30,13 @@ mysql_databases:
 packages:
     - git
 
-trust_cert: 1
-certpath: /usr/local/etc
+# The following are default cert values.
+#
+# Change trust_cert to 0 if for some reason you don’t want to
+# trust the certificate automatically
+#
+# You can also change the certpath for the local copy of the
+# self-signed cert if you really want to.
+#
+# trust_cert: 1
+# certpath: /usr/local/etc
