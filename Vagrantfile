@@ -29,7 +29,7 @@ require 'yaml'
 
 dir = File.dirname(File.expand_path(__FILE__))
 vars = YAML.load_file("#{dir}/ansible/group_vars/all")
-version = YAML.load_file("#{dir}/ansible/roles/version")
+version = YAML.load_file(File.exist?("#{dir}/ansible/version") ? "#{dir}/ansible/version" : "#{dir}/ansible/roles/version")
 
 Vagrant.configure("2") do |config|
 
@@ -62,6 +62,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.box = version
+  config.disksize.size = '64GB'
 
   config.vm.hostname = vars["hostname"]
   config.vm.network "private_network", ip: vars["private_address"]
@@ -70,11 +71,12 @@ Vagrant.configure("2") do |config|
   config.hostsupdater.aliases = [ "#{vars['email_hostname']}" ] + (vars['server_aliases'] || []) + (vars['additional_vhosts'] || [])
 
   config.ssh.username = "vagrant"
-  config.ssh.password = "vagrant"
-  config.ssh.insert_key = true
+  config.ssh.private_key_path = ["~/.ssh/id_rsa", "~/.vagrant.d/insecure_private_key"]
+  config.ssh.insert_key = false
   config.ssh.keys_only = false
   config.ssh.forward_agent = true
 
+  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
   config.vm.synced_folder ".", "/var/www/#{vars['hostname']}", type: "nfs", :nfs => true, :mount_options => ['actimeo=2']
 
   config.vm.provider "virtualbox" do |virtualbox|
