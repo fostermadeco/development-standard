@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
   config.ssh.keys_only = false
   config.ssh.forward_agent = true
 
-  config.vm.synced_folder ".", "/var/www/#{vars['hostname']}", type: "nfs"
+  config.vm.synced_folder ".", "/var/www/#{vars['hostname']}", type: "nfs", :nfs => true, :mount_options => ['actimeo=2']
 
   config.vm.provider "virtualbox" do |virtualbox|
     virtualbox.memory = 1024
