@@ -18,6 +18,10 @@ document_root: /var/www/{{ hostname }}/{{ public_dir }}
 # Use this if you want to modify your PHP version
 # php_version: "5.6"
 
+# Use this if you want to modify the node version. It can be
+# 9, 8, 6 or 4. It defaults to the highest value.
+# node_version: 8
+
 # Add all required PHP modules to this list
 php_modules:
     - mcrypt
