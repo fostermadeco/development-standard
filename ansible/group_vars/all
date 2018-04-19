@@ -1,10 +1,27 @@
-# This will be the hostname and virtualhost servername. It should end with .dev
+# This will be the hostname and virtualhost servername. It should end with `.dev`.
+# If you need to include vhost-specific directives for the primary vhost, add
+# them to the existing `files/vhost_fragment.conf.j2` file.
 hostname: example.dev
 
 # This var is used in Vagrantfile, so embedded vars (e.g., hostname)
 # will *not* be interpolated. Be sure to update the TLD and 2LD
 # accordingly.
 email_hostname: email.example.dev
+
+# Use this if you have additional server aliases for the primary vhost (not
+# additional vhosts).
+#
+# server_aliases:
+#    - alias.example.dev
+
+# Use this if you are including a task that creates a vhost (the Minio
+# task, for example) to ensure that the additional hostname is added to
+# your local hosts file. It also ensures the hostname is added to the
+# self-signed SSL certificate. Adding a host here will not actually
+# create a vhost for you.
+#
+# additional_vhosts:
+#    - minio.example.dev
 
 # This is the private address. Grab the next available from the Google spreadsheet.
 private_address: 192.168.202.101
@@ -16,6 +33,7 @@ public_dir: web
 document_root: /var/www/{{ hostname }}/{{ public_dir }}
 
 # Use this if you want to modify your PHP version
+#
 # php_version: "5.6"
 
 # Use this if you want to modify the node version. It can be
