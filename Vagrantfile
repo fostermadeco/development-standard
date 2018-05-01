@@ -3,7 +3,6 @@
 ##### Ensure required plugins are installed
 
 plugins = %w(
-  vagrant-disksize
   vagrant-hostsupdater
   vagrant-triggers
 )
