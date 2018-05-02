@@ -1,5 +1,24 @@
 # -*- mode: ruby -*-
 
+##### Ensure required plugins are installed
+
+plugins = %w(
+  vagrant-hostsupdater
+  vagrant-triggers
+)
+
+plugins.keep_if { |plugin| not Vagrant.has_plugin? plugin }
+
+if not plugins.empty?
+  if system "vagrant plugin install #{plugins.join(' ')}"
+    exec "vagrant #{ARGV.join(' ')}"
+  else
+    abort "Installation of one or more plugins has failed. Aborting."
+  end
+end
+
+####
+
 require 'yaml'
 
 dir = File.dirname(File.expand_path(__FILE__))
