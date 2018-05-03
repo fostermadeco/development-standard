@@ -30,8 +30,11 @@ Vagrant::DEFAULT_SERVER_URL.replace('https://vagrantcloud.com')
 Vagrant.configure("2") do |config|
 
   if (vars["trust_cert"] || 1) == 1
-    [:up, :provision].each do |command|
-      certpath = vars['certpath'] || "/usr/local/etc"
+    certpath = vars['certpath'] || '/usr/local/etc'
+    cert = certpath + "/ssl/certs/#{vars['hostname']}.crt"
+    keychain = '/Library/Keychains/System.keychain'
+
+    [:up, :provision, :reload].each do |command|
       if !File.exist?(certpath)
         config.trigger.before command do
           run "sudo mkdir -p #{certpath}"
@@ -40,9 +43,18 @@ Vagrant.configure("2") do |config|
       end
 
       config.trigger.after command do
-        run "sudo security add-trusted-cert -d -k '/Library/Keychains/System.keychain' #{certpath}/ssl/certs/#{vars['hostname']}.crt"
+        system("sudo security verify-cert -c #{cert} > /dev/null 2>&1 || sudo security add-trusted-cert -d -k #{keychain} #{cert}")
       end
     end
+
+    [:destroy].each do |command|
+      if File.exist?(cert)
+        config.trigger.after command do
+          system("security find-certificate -ac #{vars['hostname']} -Z #{keychain} | awk -F: '/SHA-1 hash/{ print $2 }' | xargs -I {} sudo security delete-certificate -Z {} #{keychain}")
+          File.delete(cert)
+        end
+      end
+     end
   end
 
   config.vm.box = version
