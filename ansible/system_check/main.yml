@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  connection: local
+
+  tasks:
+    - include: fix_old_box_metadata_urls.yml
