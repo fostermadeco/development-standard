@@ -3,4 +3,5 @@
   connection: local
 
   tasks:
+    - include: update_roles_submodule.yml
     - include: fix_old_box_metadata_urls.yml
