@@ -1,0 +1,16 @@
+---
+- name: find files with atlas urls
+  find:
+    paths: ~/.vagrant.d/boxes/
+    pattern: metadata_url
+    recurse: yes
+    contains: .*atlas\.hashicorp\.com.*
+  register: found
+
+- name: replace hashicorp domain with vagrantcloud
+  replace:
+    path: '{{ item.path }}'
+    regexp: '(.*)atlas\.hashicorp\.com(.*)'
+    replace: '\1vagrantcloud.com\2'
+  with_items: '{{ found.files }}'
+  when: found.matched != 0
