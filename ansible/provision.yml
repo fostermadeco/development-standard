@@ -2,23 +2,32 @@
 
   # Specifying a role will run all of the role’s tasks.
   roles:
-      - system
-      - lamp
+    - system
+    - lamp
 
   tasks:
-      - name: copy profile files
-        copy: src={{ item }} dest=/home/vagrant force=yes
-        with_fileglob:
-            - files/dot/.*
+    - name: copy profile files
+      copy:
+        src: '{{ item }}'
+        dest: /home/vagrant
+        force: no
+      with_fileglob:
+        - files/dot/.*
 
-      # Add additional tasks as needed. For example,
-      #
-      # - name: install app dependencies
-      #   command: composer install
-      #   args:
-      #       chdir: /var/www/{{ hostname }}
+    - name: change into project directory on login
+      lineinfile:
+        path: ~/.bashrc
+        line: cd /var/www/{{ hostname }}
+        state: present
 
-      # If you do not want to run all of a role’s tasks, include
-      # a single task like this:
-      #
-      # - include: roles/nosql/tasks/install_redis.yml
+    # Add additional tasks as needed. For example,
+    #
+    # - name: install app dependencies
+    #   command: composer install
+    #   args:
+    #     chdir: /var/www/{{ hostname }}
+
+    # If you do not want to run all of a role’s tasks, include
+    # a single task like this:
+    #
+    # - include: roles/nosql/tasks/install_redis.yml
