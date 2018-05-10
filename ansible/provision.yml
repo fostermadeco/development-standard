@@ -6,6 +6,11 @@
     - lamp
 
   tasks:
+    - name: set git config values
+      template:
+        src: files/gitconfig.j2
+        dest: /home/vagrant/.gitconfig
+
     - name: copy profile files
       copy:
         src: '{{ item }}'
