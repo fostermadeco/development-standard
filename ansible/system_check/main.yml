@@ -2,23 +2,13 @@
 - hosts: localhost
   connection: local
 
-  vars:
-    version_message: >
-      Please update Ansible to version 2.4 or higher by running
-      `pip install --upgrade ansible`.
-
   pre_tasks:
     - name: Verify Ansible meets version requirements with nondeprecated check.
-      assert:
-        that: "ansible_version.full is version_compare('2.4', '>=')"
-        msg: '{{ version_message }}'
-      when: ansible_version.major == 2 and ansible_version.minor in [2, 3]
-
-    - name: Verify Ansible meets version requirements with deprecated check.
-      assert:
-        that: "ansible_version.full | version_compare('2.4', '>=')"
-        msg: '{{ version_message }}'
-      when: ansible_version.major <= 1 or (ansible_version.major == 2 and ansible_version.minor <= 1)
+      fail:
+        msg: >
+          Please update Ansible to version 2.4 or higher by running
+          `pip install --upgrade ansible`.
+      when: ansible_version.major <= 1 or (ansible_version.major == 2 and ansible_version.minor <= 3)
 
   tasks:
     - include: fix_old_box_metadata_urls.yml
