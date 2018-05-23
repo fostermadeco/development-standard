@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+
+  pre_tasks:
+    - name: Verify Ansible meets the minimum version requirement
+      fail:
+        msg: >
+          Please update Ansible to version 2.4 or higher by running
+          `pip install --upgrade ansible`.
+      when: ansible_version.major <= 1 or (ansible_version.major == 2 and ansible_version.minor <= 3)
+
+  tasks:
+    - include: fix_old_box_metadata_urls.yml
