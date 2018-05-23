@@ -19,6 +19,12 @@ end
 
 ####
 
+if ['up', 'provision', 'reload'].include?(ARGV[0])
+  unless system('ansible-playbook ansible/system_check/main.yml -i localhost,')
+    raise 'System check failed'
+  end
+end
+
 require 'yaml'
 
 dir = File.dirname(File.expand_path(__FILE__))
