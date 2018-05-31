@@ -31,8 +31,6 @@ dir = File.dirname(File.expand_path(__FILE__))
 vars = YAML.load_file("#{dir}/ansible/group_vars/all")
 version = YAML.load_file("#{dir}/ansible/roles/version")
 
-Vagrant::DEFAULT_SERVER_URL.replace('https://vagrantcloud.com')
-
 Vagrant.configure("2") do |config|
 
   if (vars["trust_cert"] || 1) == 1
