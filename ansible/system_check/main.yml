@@ -11,5 +11,4 @@
       when: ansible_version.major <= 1 or (ansible_version.major == 2 and ansible_version.minor <= 3)
 
   tasks:
-    - include: update_roles_submodule.yml
-    - include: fix_old_box_metadata_urls.yml
+    - include: ../git_hooks/main.yml

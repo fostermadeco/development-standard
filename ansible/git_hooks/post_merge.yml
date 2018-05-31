@@ -1,0 +1,21 @@
+---
+- name: update the roles submodule
+  command: git submodule update
+  args:
+    chdir: ../..
+
+- name: register list of changed files
+  command: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
+  args:
+    chdir: ../..
+  register: git_changes
+
+- name: show action message when certain files have changed
+  debug:
+    msg: >
+      Provisioner changes have been detected. Please update your virtual
+      machine with `vagrant reload --provision`.
+  when: >
+    'Vagrantfile' in git_changes.stdout_lines or
+    'ansible/group_vars/all' in git_changes.stdout_lines or
+    'ansible/roles' in git_changes.stdout_lines
