@@ -1,0 +1,12 @@
+---
+### Post-merge ###
+- name: check if the post-merge playbook needs to be added to the post-merge hook
+  lineinfile:
+    path: ../../.git/hooks/post-merge
+    line: ansible-playbook -i localhost, ../git_hooks/post_merge.yml
+    create: yes
+  register: post_merge
+
+# Run playbook if it was missing
+- include: ../git_hooks/post_merge.yml
+  when: post_merge.changed
