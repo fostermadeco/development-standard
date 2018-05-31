@@ -40,6 +40,10 @@ document_root: /var/www/{{ hostname }}/{{ public_dir }}
 # 9, 8, 6 or 4. It defaults to the highest value.
 # node_version: 8
 
+# Use this if you want to modify the MongoDB version. It defaults
+# to 3.6 but can be set to 3.4.
+# mongodb_version: 3.4
+
 # Add all required PHP modules to this list
 php_modules:
     - mcrypt

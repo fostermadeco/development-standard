@@ -79,6 +79,8 @@ These items are configurable in `ansible/group_vars/all`:
 
 `node_version` — Use 9, 8, 6 or 4 to specify the nodejs version. It defaults to the highest value.
  
+`mongodb_version` — Use 3.4 or 3.6.
+
 `packages` - List of apt packages.
 
 `php_config` - List of php config items to be overrriden. The `section` value will default to `PHP`, which is the correct section most of the time. Use the `section` option the overide the section if it will not be `PHP`.
