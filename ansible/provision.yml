@@ -4,6 +4,7 @@
   roles:
     - system
     - lamp
+    - node
 
   tasks:
     - name: set git config values
