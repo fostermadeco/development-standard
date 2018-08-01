@@ -27,7 +27,7 @@ email_hostname: email.example.dev
 private_address: 192.168.202.101
 
 # This is the public html directory inside the app
-public_dir: web
+public_dir: public
 
 # This creates a document_root var from the vars declared above
 document_root: /var/www/{{ hostname }}/{{ public_dir }}
