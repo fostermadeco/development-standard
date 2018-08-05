@@ -12,3 +12,4 @@
 
   tasks:
     - include: fix_old_box_metadata_urls.yml
+    - include: ensure_keypair.yml

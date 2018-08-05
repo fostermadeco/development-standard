@@ -5,6 +5,7 @@
 plugins = %w(
   vagrant-hostsupdater
   vagrant-triggers
+  vagrant-disksize
 )
 
 plugins.keep_if { |plugin| not Vagrant.has_plugin? plugin }
