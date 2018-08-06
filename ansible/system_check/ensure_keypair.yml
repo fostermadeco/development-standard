@@ -1,0 +1,17 @@
+---
+# This is inherently idempotent and will *not* overwrite an existing SSH key.
+- name: Create a 2048-bit SSH key for user
+  user:
+    name: "{{ lookup('env','USER') }}"
+    generate_ssh_key: yes
+
+- name: Ensure key will be forwarded
+  blockinfile:
+    create: yes
+    path: ~/.ssh/config
+    insertbefore: BOF
+    block: |
+      Host *
+      IgnoreUnknown AddKeysToAgent,UseKeychain
+      AddKeysToAgent yes
+      UseKeychain yes
