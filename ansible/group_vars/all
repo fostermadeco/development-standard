@@ -1,4 +1,4 @@
-# This will be the hostname and virtualhost servername. It should end with `.dev`.
+# This will be the hostname and virtualhost servername. It should end with `.test`.
 # If you need to include vhost-specific directives for the primary vhost, add
 # them to the existing `files/vhost_fragment.conf.j2` file.
 hostname: example.test
