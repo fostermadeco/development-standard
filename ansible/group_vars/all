@@ -1,18 +1,18 @@
-# This will be the hostname and virtualhost servername. It should end with `.dev`.
+# This will be the hostname and virtualhost servername. It should end with `.test`.
 # If you need to include vhost-specific directives for the primary vhost, add
 # them to the existing `files/vhost_fragment.conf.j2` file.
-hostname: example.dev
+hostname: example.test
 
 # This var is used in Vagrantfile, so embedded vars (e.g., hostname)
 # will *not* be interpolated. Be sure to update the TLD and 2LD
 # accordingly.
-email_hostname: email.example.dev
+email_hostname: email.example.test
 
 # Use this if you have additional server aliases for the primary vhost (not
 # additional vhosts).
 #
 # server_aliases:
-#    - alias.example.dev
+#    - alias.example.test
 
 # Use this if you are including a task that creates a vhost (the Minio
 # task, for example) to ensure that the additional hostname is added to
@@ -21,7 +21,7 @@ email_hostname: email.example.dev
 # create a vhost for you.
 #
 # additional_vhosts:
-#    - minio.example.dev
+#    - minio.example.test
 
 # This is the private address. Grab the next available from the Google spreadsheet.
 private_address: 192.168.202.101
