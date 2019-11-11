@@ -17,7 +17,7 @@ After following the steps outlined below, your fellow devs will be able to clone
 1. [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 2. [Vagrant](https://www.vagrantup.com/downloads.html)
 3. Homebrew — `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` (Homebrew is not required if you truly prefer to use the system-installed Python and install Pip on your own).
-4. Python — `brew install python`
+4. Python — `brew install python@2`
 5. Ansible — `pip install ansible`
 
 ## Creating a new project
