@@ -14,9 +14,10 @@ After following the steps outlined below, your fellow devs will be able to clone
 
 ## Prerequisites
 
-1. [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-2. [Vagrant](https://www.vagrantup.com/downloads.html)
-3. Homebrew — `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` (Homebrew is not required if you truly prefer to use the system-installed Python and install Pip on your own).
+1. [VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds) (Version 5.2.x)
+2. [Vagrant](https://releases.hashicorp.com/vagrant/2.1.2/vagrant_2.1.2_x86_64.dmg) (Version 2.1.2)
+3. Homebrew — `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+    - Homebrew is not required if you prefer to use the system-installed Python and install Pip on your own. Proceed at your own risk.
 4. Python — `brew install python@2`
 5. Ansible — `pip install ansible`
 
