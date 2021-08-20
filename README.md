@@ -1,4 +1,4 @@
-# Development Standard
+# [DEPRECATED] Development Standard
 
 Base files for provisioning a standard development environment.
 
